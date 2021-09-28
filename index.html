@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ekşi sözlük - kutsal bilgi kaynağı</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
+    <link rel="icon" href="https://ekstat.com/img/ilogo_fbv2.png">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="wrapper-row" class="row">
+        <div id="wrapper-col" class="col" style="padding-top: 120px;">
+            <header id="header-row" class="row fixed-top bg-white">
+                <div id="header-col" class="col mx-0 ml-sm-4">
+                    <div id="head-row" class="row align-items-center my-3">
+                        <div id="logo-col" class="col-2 col-sm-3 col-md-3">
+                            <a href="https://eksisozluk.com/" style="text-decoration: none;">
+                                <img src="https://ekstat.com/img/ilogo_fbv2.png?v=1" width="22px" alt="logo" class="ml-3 ml-md-0 pb-sm-2">
+                                <span id="name" class="font-weight-bold h3 d-sm-none d-none d-md-inline">
+                                    <span class="text-dark">ekşi</span><span style="color: #81C14B;">sözlük</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div id="search-col" class="col-6 col-sm-5 col-md-4 pr-0 pr-sm-1 pl-0 pl-sm-5 pl-sm-1 position-relative">
+                            <div class="input-group">
+                                <input id="search-input" class="w-75" type="text" placeholder="başlık, #entry, @yazar" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button id="search-settings-button" class="btn btn-outline-secondary" type="button"><i class="fas fa-sort-down"></i></button>
+                                    <button id="search-button" class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="header-other" class="col-4 col-md-5" style="font-size: 14px;">
+                            <div class="row align-items-center">
+                                <div id="header-space" class="col-0 col-md-3 col-lg-4"></div>
+                                <div class="col-2">
+                                    <a href="#" class="text-dark">
+                                        <i class="far fa-user"></i> <span class="d-none d-lg-inline">ben</span>
+                                    </a>
+                                </div>
+                                <div class="col-3 col-md-2">
+                                        <a href="#" style="color: black;">
+                                            <i class="far fa-comment-alt"></i> <span class="d-none d-lg-inline">mesaj</span>
+                                        </a>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 pl-0 pr-0">
+                                    <a href="#" class="text-dark">--- <span class="d-none d-lg-inline">olay</span></a>
+                                </div>
+                                <div class="col-1 d-none d-lg-block">
+                                    <a href="#" class="text-dark"><i class="fas fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="tags-row" class="row">
+                        <div id="tags-col" class="col">
+                            <div id="tag-list" class="tags">
+                                <a class="tag" href="#">bugün</a>
+                                <a class="tag" href="#">gündem</a>
+                                <a class="tag" href="#">debe</a>
+                                <a class="tag" href="#">sorunsallar</a>
+                                <a class="tag" href="#">takip</a>
+                                <a class="tag d-none d-lg-block" href="#">son</a>
+                                <a class="tag d-none d-lg-block" href="#">kenar</a>
+                                <a class="tag d-none d-lg-block" href="#">çaylaklar</a>
+                                <a class="tag d-none d-lg-block" href="#">#spor</a>
+                                <a class="tag d-none d-lg-block" href="#">#ilişkiler</a>
+                                <a class="tag d-none d-lg-block" href="#">#siyaset</a>
+                                <a class="tag" href="#" style="color: black;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></a>
+                                <a class="text-dark a-unstyle font-weight-bold" href="#" style="font-size: 14px;">
+                                    <img width="22px" src="data:image/png;base64,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" alt="">
+                                    <span class="d-none d-lg-inline">pena</span>
+                                </a>
+                                <a class="text-dark a-unstyle font-weight-bold" href="#" style="font-size: 14px;">
+                                    <img width="28px" src="data:image/png;base64,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" alt="">
+                                    <span class="d-none d-lg-inline">ekşi şeyler</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+
+            <main class="row justify-content-end">
+                <div class="col-3 pl-5 pt-4 d-none d-lg-block" style="left: 0">
+                    <div id="sidebar" class="row" style="height: 100vh;">
+                        <div class="col-12 text-muted">bugün</div>
+                        <div class="col-12 mt-1"><a id="reload-button" class="a-unstyle" href="#">yenile <i class="fas fa-redo-alt fa-xs"></i></a></div>
+                        <div class="col-12 list-group" style="font-size: 14px;">
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action text-dark border-0 pl-0 ml-3 clearfix">
+                               <span class=" entry-nav float-left">bir selam verme şekli olarak araçla üstüne gitmek</span>
+                               <span class="float-right">5</span>
+                            </a>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="content" class="col-12 col-lg-9 px-5 pt-md-5">
+                    <div id="bas-reklam-row" class="row">
+                        <div class="col">
+                            <div id="ad-row" class="row">
+                                <div class="col">
+                                    <div id="bas-reklam w-100" class="ad" style="height: 250px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="two-section" class="row">
+                        <div id="main-content" class="col-12 col-lg-8">
+                            <div id="content-row" class="row">
+                                <div class="col mt-4">
+                                    <ul class="list-unstyled text-lowercase">
+                                        <li class="media">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mt-5">
+                                            <div class="media-body">
+                                                <a class="text-dark " href="#"><h5 class="font-weight-bold">Lorem ipsum dolor sit amet.</h5></a>
+                                                <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore iusto facere animi qui labore error tenetur ut inventore. Similique libero dolores officia explicabo, mollitia repudiandae omnis nobis eligendi pariatur harum.</p>
+                                                <div id="media-buttons" class="clearfix text-muted">
+                                                    <small class="float-left">
+                                                        <a href="#" class="facebook"><i class="fab fa-facebook-f mx-2"></i></a>
+                                                        <a href="#" class="twitter"><i class="fab fa-twitter ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-chevron-up"></i></a>
+                                                        <a href="#" class="down"><i class="fas fa-chevron-down ml-1 mr-3"></i></a>
+                                                        <a href="#" class="green-hover"><i class="fas fa-tint"></i></a>
+                                                        <a href="#" class="green-hover">183</a>
+                                                    </small>
+                                                    <small class="float-right">
+                                                        <a class="text-muted" href="#">30.11.2012 09:11</a>
+                                                        <a href="#" class="mx-2" style="color: #81C14B;">username</a>
+                                                        <a href="#"  style="color: #81C14B;"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span></a><span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+    
+                        </div>
+
+                        <div id="right-ad" class="col-12 col-lg-4 mt-5">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="aside-ad" class="ad" style="height: 600px;"></div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <div id="eksi-ad" class="ad" style="height: 340px;"></div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col">
+                                        <div id="sticky-ad" class="ad" style="height: 250px; position: sticky; top: 5px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <div id="reklam-footer" class="row mt-5 my-4">
+                        <div class="col">
+                            <div id="ayaq-reklam w-100" class="ad" style="height: 250px;"></div>
+                        </div>
+                    </div>
+
+                    <footer class="row">
+                        <div class="col">
+                            <div class="border-top pt-2 mb-5" style="font-size: 14px;">
+                                <a href="#" class="px-2 text-secondary">iletişim</a>
+                                <a href="#" class="px-2 text-secondary">reklam</a>
+                                <a href="#" class="px-2 text-secondary">kariyer</a>
+                                <a href="#" class="px-2 text-secondary">kullanım koşulları</a>
+                                <a href="#" class="px-2 text-secondary">gizlilik politikamız</a>
+                                <a href="#" class="px-2 text-secondary">sss</a>
+                                <a href="#" class="px-2 text-secondary">istatistikler</a>
+                                <a href="#" class="px-2 text-secondary">modlog</a>
+                                <a href="#" class="px-2 text-secondary">sub-etha</a>
+                                <a href="#" class="px-2 text-secondary">instagram</a>
+                                <a href="#" class="px-2 text-secondary">twitter</a>
+                                <a href="#" class="px-2 text-secondary">facebook</a>
+                            </div>
+                        </div>
+                    </footer>
+
+                </div>
+                
+            </main>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://kit.fontawesome.com/4e0535d0d8.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    
+ 
+
+</body>
+</html>
